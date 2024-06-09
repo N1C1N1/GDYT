@@ -1,5 +1,4 @@
 from flet import *
-from asyncio import run
 import requests
 
 def get(id: str | int = None):
@@ -39,7 +38,7 @@ def main(page: Page):
         page.client_storage.set("id", idfield.value.strip())
 
         try:
-            api = run(get(idfield.value.strip()))
+            api = get(idfield.value.strip())
             page.client_storage.set("api", api)
 
             idfield.error_text = None
