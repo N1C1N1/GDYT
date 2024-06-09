@@ -1,12 +1,10 @@
 from flet import *
 from asyncio import run
-from aiohttp import ClientSession
+import requests
 
-async def get(id: str | int = None):
-    async with ClientSession() as s:
-        async with s.get(f"https://gdbrowser.com/api/search/{id}") as response:
-            response = await response.json()
-            return response[0]
+def get(id: str | int = None):
+    response = requests.get(f"https://gdbrowser.com/api/search/{id}").json()
+    return response[0]
 
 def main(page: Page):
     def playground_change(e: ControlEvent):
