@@ -8,11 +8,13 @@ def get(id: str | int = None):
 def main(page: Page):
     page.title = 'GDYT'
     def playground_change(e: ControlEvent):
-        if page.client_storage.get("api") != None:
+        # if page.client_storage.get("api") != None:
+        if playground.data != None:
 
             try:
                 playground.content.error_text = None
-                playground.content.value = playground.content.value.format(**page.client_storage.get("api"))
+                # playground.content.value = playground.content.value.format(**page.client_storage.get("api"))
+                playground.content.value = playground.content.value.format(**playground.data)
             except:
                 playground.content.error_text = 'key not found'
 
@@ -32,15 +34,17 @@ def main(page: Page):
         expand=3,
         alignment=alignment.center,
         border_radius=7,
-        padding=6
+        padding=6,
+        data=None
     )
 
     def get_api(e):
-        page.client_storage.set("id", idfield.value.strip())
+        # page.client_storage.set("id", idfield.value.strip())
 
         try:
             api = get(idfield.value.strip())
-            page.client_storage.set("api", api)
+            # page.client_storage.set("api", api)
+            playground.data = api
 
             idfield.error_text = None
             idfield.update()
@@ -61,7 +65,7 @@ def main(page: Page):
     idfield = TextField(
         label="id",
         on_submit=get_api,
-        value=page.client_storage.get("id")
+        # value=page.client_storage.get("id")
     )
 
     buttons = Row(
