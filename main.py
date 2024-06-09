@@ -6,6 +6,7 @@ def get(id: str | int = None):
     return response[0]
 
 def main(page: Page):
+    page.title = 'GDYT'
     def playground_change(e: ControlEvent):
         if page.client_storage.get("api") != None:
 
